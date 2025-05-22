@@ -3,10 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # --- Paths ---
-CALIB_IMG_PATH = "C:/Users/gabri/OneDrive/Documentos/Universidade/2o semestre/SEIM/imgs/img2.jpeg"
-TEST_IMG_PATH = "C:/Users/gabri/OneDrive/Documentos/Universidade/2o semestre/SEIM/imgs/img1.jpeg"
+CALIB_IMG_PATH = "C:/Users/gabri/OneDrive/Documentos/Universidade/2o semestre//imgs/img_cal.jpeg"
+TEST_IMG_PATH = "C:/Users/gabri/OneDrive/Documentos/Universidade/2o semestre/SEIM/imgs/img2.11.jpeg"
 
-# --- Hough parameters ---
+# --- Parâmetros de Hough  ---
 HOUGH_THRESH = 30       # threshold for HoughLinesP votes
 MIN_LINE_LENGTH = 30    # minimum line segment length (pixels)
 MAX_LINE_GAP = 10       # maximum allowed gap between line segments (pixels)
