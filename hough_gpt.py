@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # --- Paths ---
-CALIB_IMG_PATH = "C:/Users/gabri/OneDrive/Documentos/Universidade/2o semestre//imgs/img_cal.jpeg"
-TEST_IMG_PATH = "C:/Users/gabri/OneDrive/Documentos/Universidade/2o semestre/SEIM/imgs/img2.11.jpeg"
+CALIB_IMG_PATH = "./imgs/img_cal.jpeg"
+TEST_IMG_PATH = "./imgs/img1.jpeg"
 
 # --- Parâmetros de Hough  ---
 HOUGH_THRESH = 30       # threshold for HoughLinesP votes
