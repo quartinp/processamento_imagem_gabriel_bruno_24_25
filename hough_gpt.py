@@ -18,6 +18,7 @@ def calibrate(image_path, square_size_mm=50.0):
     First uses HoughLinesP to detect orthogonal edges; if that fails,
     falls back to contour approximation on the largest quadrilateral.
     """
+
     img = cv2.imread(image_path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     edges = cv2.Canny(gray, 50, 150)
@@ -46,35 +47,11 @@ def calibrate(image_path, square_size_mm=50.0):
     else:
         print("No lines from Hough—falling back to contour method.")
 
-    # --- Fallback: contour-based calibration ---
-    # Threshold to binary and find contours
-    blurred = cv2.GaussianBlur(gray, (5,5), 0)
-    _, thresh = cv2.threshold(blurred, 60, 255, cv2.THRESH_BINARY_INV)
-    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    # Find largest 4-point contour (assumed calibration square)
-    best = None
-    max_area = 0
-    for cnt in contours:
-        peri = cv2.arcLength(cnt, True)
-        approx = cv2.approxPolyDP(cnt, 0.02 * peri, True)
-        if len(approx) == 4:
-            x,y,w,h = cv2.boundingRect(approx)
-            area = w*h
-            if area > max_area:
-                max_area = area
-                best = (w, h)
-    if best is None:
-        raise ValueError("Calibration failed: no square contour found")
-
-    w, h = best
-    mm_per_pixel = square_size_mm / max(w, h)
-    print(f"Calibration via contour: {mm_per_pixel:.4f} mm/pixel")
-    return mm_per_pixel
-
 # --- Rectangle detection via contours ---
 def detect_objects(image_path, mm_per_pixel, min_area_mm2=1000):
     img = cv2.imread(image_path)
     orig = img.copy()
+        
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (5,5), 0)
     _, thresh = cv2.threshold(blurred, 47, 255, cv2.THRESH_BINARY_INV)
